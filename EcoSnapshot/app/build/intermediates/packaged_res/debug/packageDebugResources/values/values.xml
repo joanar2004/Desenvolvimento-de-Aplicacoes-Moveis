@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="md_theme_background">#F1F8E9</color>
+    <color name="md_theme_error">#BA1A1A</color>
+    <color name="md_theme_onBackground">#1B1B1F</color>
+    <color name="md_theme_onError">#FFFFFF</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_onPrimaryContainer">#1B5E20</color>
+    <color name="md_theme_onSecondary">#FFFFFF</color>
+    <color name="md_theme_onSecondaryContainer">#004D40</color>
+    <color name="md_theme_onSurface">#1B1B1F</color>
+    <color name="md_theme_onSurfaceVariant">#44474E</color>
+    <color name="md_theme_primary">#2E7D32</color>
+    <color name="md_theme_primaryContainer">#A5D6A7</color>
+    <color name="md_theme_secondary">#00695C</color>
+    <color name="md_theme_secondaryContainer">#80CBC4</color>
+    <color name="md_theme_surface">#FDFDF5</color>
+    <color name="md_theme_surfaceVariant">#E0E0E0</color>
+    <color name="seed">#2E7D32</color>
+    <color name="white">#FFFFFF</color>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_capture_image">Tirar Foto</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_edit">Editar</string>
+    <string name="action_save">Guardar Alterações</string>
+    <string name="add_record_message">Novo registo adicionado com sucesso!</string>
+    <string name="app_name">EcoSnapshot</string>
+    <string name="category_animal">Animal</string>
+    <string name="category_plant">Planta</string>
+    <string name="content_description_species_image">Imagem da espécie</string>
+    <string name="delete_confirm_message">Tem a certeza que deseja eliminar esta espécie? Esta ação não pode ser desfeita.</string>
+    <string name="delete_confirm_title">Eliminar Espécie</string>
+    <string name="delete_success_message">Espécie eliminada com sucesso!</string>
+    <string name="dialog_add_category_title">Escolha a categoria</string>
+    <string name="fab_add_record">Adicionar Registo</string>
+    <string name="label_common_name">Nome Comum</string>
+    <string name="label_description">Descrição</string>
+    <string name="label_habitat">Habitat</string>
+    <string name="label_rarity">Nível de Raridade</string>
+    <string name="label_scientific_name">Nome Científico</string>
+    <string name="save_success_message">Alterações guardadas com sucesso!</string>
+    <string name="tab_animals">Animais</string>
+    <string name="tab_plants">Plantas</string>
+    <string name="title_species_detail">Detalhes da Espécie</string>
+    <string name="title_species_list">ÍNDICE DE BIODIVERSIDADE</string>
+    <style name="Theme.EcoSnapshot" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_onSecondaryContainer</item>
+        <item name="android:colorBackground">@color/md_theme_background</item>
+        <item name="colorOnBackground">@color/md_theme_onBackground</item>
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</item>
+        <item name="colorError">@color/md_theme_error</item>
+        <item name="colorOnError">@color/md_theme_onError</item>
+    </style>
+</resources>

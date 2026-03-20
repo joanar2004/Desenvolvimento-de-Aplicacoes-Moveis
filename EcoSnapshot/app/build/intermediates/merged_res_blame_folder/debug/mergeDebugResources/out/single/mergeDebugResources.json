@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-debug-51:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-main-53:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-debug-51:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-main-53:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-debug-51:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-main-53:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-debug-51:\\navigation_nav_graph.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-main-53:\\navigation\\nav_graph.xml"
+    },
+    {
+        "merged": "com.example.ecosnapshot.app-debug-51:/layout_item_species.xml.flat",
+        "source": "com.example.ecosnapshot.app-main-53:/layout/item_species.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-debug-51:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-main-53:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-debug-51:\\layout_fragment_species_detail.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-main-53:\\layout\\fragment_species_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-debug-51:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-main-53:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-debug-51:\\layout_item_species.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-main-53:\\layout\\item_species.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-debug-51:\\drawable_ic_species_placeholder.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-main-53:\\drawable\\ic_species_placeholder.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-debug-51:\\layout_fragment_biodiversity_list.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-main-53:\\layout\\fragment_biodiversity_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-debug-51:\\xml_file_paths.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\com.example.ecosnapshot.app-main-53:\\xml\\file_paths.xml"
+    }
+]

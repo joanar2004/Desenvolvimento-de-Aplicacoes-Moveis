@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/biodiversityListFragment">
+
+    <fragment
+        android:id="@+id/biodiversityListFragment"
+        android:name="com.example.ecosnapshot.ui.list.BiodiversityListFragment"
+        android:label="@string/title_species_list"
+        tools:layout="@layout/fragment_species_detail">
+
+        <action
+            android:id="@+id/action_list_to_detail"
+            app:destination="@id/speciesDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/speciesDetailFragment"
+        android:name="com.example.ecosnapshot.ui.detail.SpeciesDetailFragment"
+        android:label="@string/title_species_detail"
+        tools:layout="@layout/fragment_species_detail">
+
+        <argument
+            android:name="speciesId"
+            app:argType="integer" />
+
+        <argument
+            android:name="isEditing"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
+
+</navigation>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Background -->
+    <path
+        android:fillColor="#E8F5E9"
+        android:pathData="M0,0h96v96H0z" />
+    <!-- Leaf icon -->
+    <path
+        android:fillColor="#66BB6A"
+        android:pathData="M48,16 C48,16 28,40 28,56 C28,67.05 36.95,76 48,76 C59.05,76 68,67.05 68,56 C68,40 48,16 48,16z" />
+    <path
+        android:fillColor="#43A047"
+        android:pathData="M48,36 L48,68 M38,52 C38,52 48,42 58,52"
+        android:strokeColor="#388E3C"
+        android:strokeWidth="2" />
+</vector>
