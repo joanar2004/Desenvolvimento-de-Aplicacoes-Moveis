@@ -5,7 +5,8 @@
     <mapping directory="$PROJECT_DIR$/EcoSnapshot" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/EcoSnapshot/app" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/HelloWorldOptional" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Kotlin_Exercises_TP2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Kotlin_TP2_1_1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Kotlin_TP2_1_2" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Trabalho1" vcs="Git" />
   </component>
 </project>
