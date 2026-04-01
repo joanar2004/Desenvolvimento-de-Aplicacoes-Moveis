@@ -1,4 +1,4 @@
-//O programa corre dentro de um ciclo infinito (while (true)), o que significa que não se desliga após uma conta,
+// O programa corre dentro de um ciclo infinito (while (true)), o que significa que não se desliga após uma conta,
 // permitindo várias operações seguidas. A escolha do when em vez de múltiplos if/else torna o código muito mais legível
 // fácil de expandir.
 // Além disso, o uso de tratamento de exceções (try-catch) garante que, se o utilizador escrever uma letra onde deveria
