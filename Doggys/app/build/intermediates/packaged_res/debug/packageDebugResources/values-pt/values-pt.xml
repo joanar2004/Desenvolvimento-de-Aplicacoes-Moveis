@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Explorador de Cães</string>
+    <string name="error_unknown">Ocorreu um erro desconhecido.</string>
+    <string name="no_internet_no_cache">Sem ligação à internet e sem imagens guardadas localmente.</string>
+    <string name="offline_msg">Ligação à internet indisponível. A mostrar imagens guardadas localmente.</string>
+</resources>

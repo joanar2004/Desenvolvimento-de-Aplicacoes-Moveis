@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-debug-39:\\mipmap_ic_launcher.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-main-41:\\mipmap\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-debug-39:\\drawable_ic_heart_filled.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-main-41:\\drawable\\ic_heart_filled.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-debug-39:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-main-41:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-debug-39:\\drawable_ic_placeholder.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-main-41:\\drawable\\ic_placeholder.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-debug-39:\\mipmap_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-main-41:\\mipmap\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-debug-39:\\layout_item_favourite.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-main-41:\\layout\\item_favourite.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-debug-39:\\layout_activity_image_details.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-main-41:\\layout\\activity_image_details.xml"
+    },
+    {
+        "merged": "dam.A50829.dogbreedxplorer.app-debug-39:/drawable_image_app.png.flat",
+        "source": "dam.A50829.dogbreedxplorer.app-main-41:/drawable/image_app.png"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-debug-39:\\drawable_imagem_app.jpg.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-main-41:\\drawable\\imagem_app.jpg"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-debug-39:\\drawable_ic_error.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-main-41:\\drawable\\ic_error.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-debug-39:\\drawable_ic_heart_outline.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-main-41:\\drawable\\ic_heart_outline.xml"
+    },
+    {
+        "merged": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-debug-39:\\layout_item_dog_image.xml.flat",
+        "source": "C:\\Users\\limar\\.gradle\\daemon\\9.2.1\\dam.A50829.dogbreedxplorer.app-main-41:\\layout\\item_dog_image.xml"
+    }
+]

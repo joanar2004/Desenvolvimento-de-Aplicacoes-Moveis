@@ -1,0 +1,42 @@
+dam.A50829.dogbreedxplorer.app-jetified-lifecycle-viewmodel-savedstate-2.7.0-0 C:\Users\limar\.gradle\caches\9.2.1\transforms\0416741a8bd8a5799c19eb1dc7d7e025\workspace\transformed\jetified-lifecycle-viewmodel-savedstate-2.7.0\res
+dam.A50829.dogbreedxplorer.app-jetified-viewpager2-1.0.0-1 C:\Users\limar\.gradle\caches\9.2.1\transforms\09f1951c9ca2058bf5243ffd6217f7a4\workspace\transformed\jetified-viewpager2-1.0.0\res
+dam.A50829.dogbreedxplorer.app-lifecycle-viewmodel-2.7.0-2 C:\Users\limar\.gradle\caches\9.2.1\transforms\0a95292d742ed52ad1c4bd59c4eaf018\workspace\transformed\lifecycle-viewmodel-2.7.0\res
+dam.A50829.dogbreedxplorer.app-material-1.11.0-3 C:\Users\limar\.gradle\caches\9.2.1\transforms\134b04c7ae0f9b9bf2299af13c1f68ee\workspace\transformed\material-1.11.0\res
+dam.A50829.dogbreedxplorer.app-jetified-startup-runtime-1.1.1-4 C:\Users\limar\.gradle\caches\9.2.1\transforms\13cd0206f28ead34444b5477b8cdfc02\workspace\transformed\jetified-startup-runtime-1.1.1\res
+dam.A50829.dogbreedxplorer.app-jetified-savedstate-ktx-1.2.1-5 C:\Users\limar\.gradle\caches\9.2.1\transforms\13ec17be8e7e76e62250f549fea35310\workspace\transformed\jetified-savedstate-ktx-1.2.1\res
+dam.A50829.dogbreedxplorer.app-jetified-lifecycle-process-2.7.0-6 C:\Users\limar\.gradle\caches\9.2.1\transforms\195561a9e062b5b4e9fab867d4c90b8f\workspace\transformed\jetified-lifecycle-process-2.7.0\res
+dam.A50829.dogbreedxplorer.app-recyclerview-1.1.0-7 C:\Users\limar\.gradle\caches\9.2.1\transforms\24686600fcc6bab6be1b4338a0feab81\workspace\transformed\recyclerview-1.1.0\res
+dam.A50829.dogbreedxplorer.app-jetified-annotation-experimental-1.4.0-8 C:\Users\limar\.gradle\caches\9.2.1\transforms\4db73491d8ee49b49993312b61bf4f4b\workspace\transformed\jetified-annotation-experimental-1.4.0\res
+dam.A50829.dogbreedxplorer.app-coordinatorlayout-1.1.0-9 C:\Users\limar\.gradle\caches\9.2.1\transforms\530dc6bba48e0ed347efbe9a4754a43b\workspace\transformed\coordinatorlayout-1.1.0\res
+dam.A50829.dogbreedxplorer.app-jetified-glide-4.16.0-10 C:\Users\limar\.gradle\caches\9.2.1\transforms\5576e760a773c46b946ee6a418f4d6d2\workspace\transformed\jetified-glide-4.16.0\res
+dam.A50829.dogbreedxplorer.app-drawerlayout-1.1.1-11 C:\Users\limar\.gradle\caches\9.2.1\transforms\5aa92dc81d120e37e5aef8e99377bbb9\workspace\transformed\drawerlayout-1.1.1\res
+dam.A50829.dogbreedxplorer.app-jetified-lifecycle-viewmodel-ktx-2.7.0-12 C:\Users\limar\.gradle\caches\9.2.1\transforms\5fdd61afd85340997edda7d807b166c8\workspace\transformed\jetified-lifecycle-viewmodel-ktx-2.7.0\res
+dam.A50829.dogbreedxplorer.app-lifecycle-runtime-2.7.0-13 C:\Users\limar\.gradle\caches\9.2.1\transforms\6c66e4b6b754b1748ac3ba92e3b1f594\workspace\transformed\lifecycle-runtime-2.7.0\res
+dam.A50829.dogbreedxplorer.app-jetified-appcompat-resources-1.6.1-14 C:\Users\limar\.gradle\caches\9.2.1\transforms\71adab456fb5d48936c4549d580eb50e\workspace\transformed\jetified-appcompat-resources-1.6.1\res
+dam.A50829.dogbreedxplorer.app-jetified-profileinstaller-1.3.1-15 C:\Users\limar\.gradle\caches\9.2.1\transforms\7468bb90f82936fc2953c65ac21e116e\workspace\transformed\jetified-profileinstaller-1.3.1\res
+dam.A50829.dogbreedxplorer.app-core-runtime-2.2.0-16 C:\Users\limar\.gradle\caches\9.2.1\transforms\8569373a28ac57e5c62408ae3721fd2d\workspace\transformed\core-runtime-2.2.0\res
+dam.A50829.dogbreedxplorer.app-appcompat-1.6.1-17 C:\Users\limar\.gradle\caches\9.2.1\transforms\869ea54f29672b5f1941efbf955552b2\workspace\transformed\appcompat-1.6.1\res
+dam.A50829.dogbreedxplorer.app-jetified-lifecycle-livedata-core-ktx-2.7.0-18 C:\Users\limar\.gradle\caches\9.2.1\transforms\87d5142494954f1ca695f2152073c705\workspace\transformed\jetified-lifecycle-livedata-core-ktx-2.7.0\res
+dam.A50829.dogbreedxplorer.app-jetified-activity-ktx-1.9.0-19 C:\Users\limar\.gradle\caches\9.2.1\transforms\9bc164724024aeb7c84f5a6b02efa52b\workspace\transformed\jetified-activity-ktx-1.9.0\res
+dam.A50829.dogbreedxplorer.app-cardview-1.0.0-20 C:\Users\limar\.gradle\caches\9.2.1\transforms\b50eca95c873afb694dc84761023808a\workspace\transformed\cardview-1.0.0\res
+dam.A50829.dogbreedxplorer.app-jetified-emoji2-1.2.0-21 C:\Users\limar\.gradle\caches\9.2.1\transforms\bc8bf64ca95e1ffc974e7d648ec75930\workspace\transformed\jetified-emoji2-1.2.0\res
+dam.A50829.dogbreedxplorer.app-constraintlayout-2.1.4-22 C:\Users\limar\.gradle\caches\9.2.1\transforms\bde19b99e2c8dc7a6cd91d479d9d48cf\workspace\transformed\constraintlayout-2.1.4\res
+dam.A50829.dogbreedxplorer.app-lifecycle-livedata-2.7.0-23 C:\Users\limar\.gradle\caches\9.2.1\transforms\c531b5d874ad500b13cb4f275a69c2f2\workspace\transformed\lifecycle-livedata-2.7.0\res
+dam.A50829.dogbreedxplorer.app-swiperefreshlayout-1.1.0-24 C:\Users\limar\.gradle\caches\9.2.1\transforms\c59406191ee4e6f7ae2951f88cb340d0\workspace\transformed\swiperefreshlayout-1.1.0\res
+dam.A50829.dogbreedxplorer.app-transition-1.2.0-25 C:\Users\limar\.gradle\caches\9.2.1\transforms\ca41405d56ed3f07d9f3e831c1e3f8a2\workspace\transformed\transition-1.2.0\res
+dam.A50829.dogbreedxplorer.app-jetified-emoji2-views-helper-1.2.0-26 C:\Users\limar\.gradle\caches\9.2.1\transforms\d4e3208bb6e41e32ca18cd50d46f721c\workspace\transformed\jetified-emoji2-views-helper-1.2.0\res
+dam.A50829.dogbreedxplorer.app-fragment-1.3.6-27 C:\Users\limar\.gradle\caches\9.2.1\transforms\d5a5972155fbf2455c27805e7edbec3e\workspace\transformed\fragment-1.3.6\res
+dam.A50829.dogbreedxplorer.app-jetified-lifecycle-livedata-ktx-2.7.0-28 C:\Users\limar\.gradle\caches\9.2.1\transforms\d8e7c2740e17f5c3a722f82201141753\workspace\transformed\jetified-lifecycle-livedata-ktx-2.7.0\res
+dam.A50829.dogbreedxplorer.app-jetified-savedstate-1.2.1-29 C:\Users\limar\.gradle\caches\9.2.1\transforms\e26fa2ea6551cdd8f77f72ccec216eef\workspace\transformed\jetified-savedstate-1.2.1\res
+dam.A50829.dogbreedxplorer.app-jetified-core-ktx-1.13.0-30 C:\Users\limar\.gradle\caches\9.2.1\transforms\e3a57b3d1cd83a49c31cbc8a756f89c9\workspace\transformed\jetified-core-ktx-1.13.0\res
+dam.A50829.dogbreedxplorer.app-jetified-activity-1.9.0-31 C:\Users\limar\.gradle\caches\9.2.1\transforms\e70405e7407a7478270ddc42e508707a\workspace\transformed\jetified-activity-1.9.0\res
+dam.A50829.dogbreedxplorer.app-lifecycle-livedata-core-2.7.0-32 C:\Users\limar\.gradle\caches\9.2.1\transforms\e70d1d52ec94c8038a371291e55017c0\workspace\transformed\lifecycle-livedata-core-2.7.0\res
+dam.A50829.dogbreedxplorer.app-core-1.13.0-33 C:\Users\limar\.gradle\caches\9.2.1\transforms\f6c0ec7120159ba4cbd8291b1998a8ac\workspace\transformed\core-1.13.0\res
+dam.A50829.dogbreedxplorer.app-jetified-lifecycle-runtime-ktx-2.7.0-34 C:\Users\limar\.gradle\caches\9.2.1\transforms\fbf2d58e102cb5285193d50f53a34814\workspace\transformed\jetified-lifecycle-runtime-ktx-2.7.0\res
+dam.A50829.dogbreedxplorer.app-pngs-35 C:\Users\limar\Desktop\LEIM\Semestre 6\Doggys\app\build\generated\res\pngs\debug
+dam.A50829.dogbreedxplorer.app-resValues-36 C:\Users\limar\Desktop\LEIM\Semestre 6\Doggys\app\build\generated\res\resValues\debug
+dam.A50829.dogbreedxplorer.app-packageDebugResources-37 C:\Users\limar\Desktop\LEIM\Semestre 6\Doggys\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+dam.A50829.dogbreedxplorer.app-packageDebugResources-38 C:\Users\limar\Desktop\LEIM\Semestre 6\Doggys\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+dam.A50829.dogbreedxplorer.app-debug-39 C:\Users\limar\Desktop\LEIM\Semestre 6\Doggys\app\build\intermediates\merged_res\debug\mergeDebugResources
+dam.A50829.dogbreedxplorer.app-debug-40 C:\Users\limar\Desktop\LEIM\Semestre 6\Doggys\app\src\debug\res
+dam.A50829.dogbreedxplorer.app-main-41 C:\Users\limar\Desktop\LEIM\Semestre 6\Doggys\app\src\main\res

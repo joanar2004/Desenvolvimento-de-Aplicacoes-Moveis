@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "dam.A50829.dogbreedxplorer.app-mergeDebugResources-37:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\limar\\.gradle\\caches\\9.2.1\\transforms\\134b04c7ae0f9b9bf2299af13c1f68ee\\workspace\\transformed\\material-1.11.0\\res\\values-w600dp-land-v13\\values-w600dp-land-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "54",
+                        "endOffsets": "105"
+                    }
+                }
+            ]
+        }
+    ]
+}

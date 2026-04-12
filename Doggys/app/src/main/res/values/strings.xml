@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Dog Breeds Explorer</string>
+    <string name="offline_msg">You are offline. Showing cached images.</string>
+    <string name="no_internet_no_cache">No internet connection and no cached images available.</string>
+    <string name="error_unknown">An unknown error occurred.</string>
+    <string name="favourites">Favourites</string>
+</resources>
