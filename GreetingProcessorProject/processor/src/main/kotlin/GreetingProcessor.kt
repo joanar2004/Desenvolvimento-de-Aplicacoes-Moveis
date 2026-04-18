@@ -11,9 +11,10 @@ import javax.lang.model.element.TypeElement
 import javax.tools.Diagnostic
 
 @AutoService(Processor::class)
-@SupportedSourceVersion(SourceVersion.RELEASE_21)
 @SupportedAnnotationTypes("annotations.Greeting")
 class GreetingProcessor : AbstractProcessor() {
+
+    override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
 
     override fun process(annotations: MutableSet<out TypeElement>,
                          roundEnv: RoundEnvironment): Boolean {
