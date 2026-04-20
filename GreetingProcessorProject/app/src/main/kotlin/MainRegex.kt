@@ -1,6 +1,6 @@
 package app
 
-fun mainRegex() {
+fun main() {
     // String de input que contém o nome e o endereço
     val input = "Name: John Address: 123 Street"
 
