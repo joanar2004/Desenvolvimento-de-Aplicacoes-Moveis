@@ -1,17 +1,19 @@
 # Tutorial 3 — JPCompose
 
 **Unidade Curricular:** Desenvolvimento de Aplicações Móveis (DAM)  
-**Aluno(s):** _______________  
-**Data:** Abril 2026  
-**URL do Repositório:** _______________  
+**Aluno:** Joana Ramos
 
+**Data:** Abril 2026  
+**URL do Repositório:** https://github.com/joanar2004/Desenvolvimento-de-Aplicacoes-Moveis.git
 ---
 
 ## 1. Introdução
 
 Este tutorial está dividido em duas partes principais. A primeira parte foca-se na criação de um processador de anotações personalizado em Kotlin, utilizando um projeto multi-módulo no IntelliJ IDEA. A segunda parte consiste em reconstruir a WeatherApp do tutorial anterior, adaptando-a para seguir a arquitetura MVVM com Jetpack Compose.
 
-Na primeira parte, é definida uma anotação `@Greeting` que é processada em tempo de compilação para gerar automaticamente classes wrapper em torno dos métodos anotados. Estas classes wrapper imprimem uma mensagem de saudação antes de delegar a chamada ao método original.
+Na primeira parte foram implementados dois processadores de anotações:
+- **GreetingProcessor** — gera classes wrapper que imprimem uma mensagem de saudação antes de delegar a chamada ao método original
+- **RegexProcessor** — gera classes que implementam métodos abstratos usando expressões regulares para extrair partes de uma string de input
 
 ---
 
@@ -19,11 +21,9 @@ Na primeira parte, é definida uma anotação `@Greeting` que é processada em t
 
 O projeto do processador de anotações (`GreetingProcessorProject`) está estruturado como um projeto Gradle multi-módulo com três módulos:
 
-- **annotations** — define a anotação `@Greeting`
-- **processor** — implementa o processador de anotações usando KotlinPoet e AutoService
-- **app** — utiliza a anotação e as classes wrapper geradas automaticamente
-
-O processador de anotações analisa os métodos anotados com `@Greeting` em tempo de compilação e gera automaticamente uma classe wrapper para cada classe que contém métodos anotados.
+- **annotations** — define as anotações `@Greeting` e `@Extract`
+- **processor** — implementa os processadores de anotações usando KotlinPoet e AutoService
+- **app** — utiliza as anotações e as classes geradas automaticamente
 
 ---
 
@@ -35,18 +35,22 @@ O projeto segue uma arquitetura multi-módulo:
 
 ```
 GreetingProcessorProject/
-├── annotations/         # Definição da anotação @Greeting
-├── processor/           # GreetingProcessor (processador de anotações)
-└── app/                 # MyClass, Main (usa o MyClassWrapper gerado)
+├── annotations/         # Definição das anotações @Greeting e @Extract
+├── processor/           # GreetingProcessor e RegexProcessor
+└── app/                 # MyClass, DataProcessor, Main (usa as classes geradas)
 ```
 
-A anotação `@Greeting` é definida com:
+### Anotação `@Greeting`
 - `@Target(AnnotationTarget.FUNCTION)` — apenas aplicável a funções
 - `@Retention(AnnotationRetention.SOURCE)` — utilizada apenas em tempo de compilação
+- Parâmetro `message: String` — mensagem de saudação a imprimir
 
-O processador usa **KotlinPoet** para gerar código Kotlin e **AutoService** para se registar automaticamente.
+### Anotação `@Extract`
+- `@Target(AnnotationTarget.FUNCTION)` — apenas aplicável a funções
+- `@Retention(AnnotationRetention.SOURCE)` — utilizada apenas em tempo de compilação
+- Parâmetro `regex: String` — expressão regular para extrair dados do input
 
-### Fluxo de Geração de Código
+### Fluxo de Geração de Código — GreetingProcessor
 
 ```
 Anotação @Greeting no método
@@ -58,11 +62,25 @@ MyClassWrapper.kt (gerado automaticamente)
 Main.kt usa o MyClassWrapper
 ```
 
+### Fluxo de Geração de Código — RegexProcessor
+
+```
+Anotação @Extract no método abstrato
+        ↓
+RegexProcessor (em tempo de compilação)
+        ↓
+DataProcessorExtractor.kt (gerado automaticamente)
+        ↓
+MainRegex.kt usa o DataProcessorExtractor
+```
+
 ---
 
 ## 4. Implementação
 
-### `Greeting.kt` (módulo annotations)
+### Secção 1 — GreetingProcessor
+
+#### `Greeting.kt` (módulo annotations)
 
 ```kotlin
 package annotations
@@ -72,7 +90,7 @@ package annotations
 annotation class Greeting(val message: String)
 ```
 
-### `GreetingProcessor.kt` (módulo processor)
+#### `GreetingProcessor.kt` (módulo processor)
 
 O processador estende `AbstractProcessor` e é registado com `@AutoService`. Ele:
 1. Analisa todos os elementos anotados com `@Greeting`
@@ -80,7 +98,7 @@ O processador estende `AbstractProcessor` e é registado com `@AutoService`. Ele
 3. Gera uma classe wrapper para cada grupo usando KotlinPoet
 4. Escreve o ficheiro gerado na diretoria de output do kapt
 
-### `MyClass.kt` (módulo app)
+#### `MyClass.kt` (módulo app)
 
 ```kotlin
 package app
@@ -101,7 +119,7 @@ open class MyClass {
 }
 ```
 
-### `MyClassWrapper.kt` (gerado automaticamente)
+#### `MyClassWrapper.kt` (gerado automaticamente)
 
 ```kotlin
 package app
@@ -121,7 +139,7 @@ public final class MyClassWrapper(
 }
 ```
 
-### `Main.kt` (módulo app)
+#### `Main.kt` (módulo app)
 
 ```kotlin
 package app
@@ -136,9 +154,84 @@ fun main() {
 
 ---
 
+### Secção 2 — RegexProcessor
+
+#### `Extract.kt` (módulo annotations)
+
+```kotlin
+package annotations
+
+@Target(AnnotationTarget.FUNCTION)
+@Retention(AnnotationRetention.SOURCE)
+annotation class Extract(val regex: String)
+```
+
+#### `RegexProcessor.kt` (módulo processor)
+
+O processador estende `AbstractProcessor` e é registado com `@AutoService`. Ele:
+1. Analisa todos os elementos anotados com `@Extract`
+2. Agrupa os métodos anotados pela classe abstrata que os contém
+3. Gera uma classe concreta que estende a classe abstrata original
+4. Para cada método, gera uma implementação que aplica a regex ao input e retorna o primeiro grupo capturado
+
+#### `DataProcessor.kt` (módulo app)
+
+```kotlin
+package app
+
+import annotations.Extract
+
+abstract class DataProcessor(val input: String) {
+
+    @Extract(regex = "Name: (\\w+)")
+    abstract fun getName(): String?
+
+    @Extract(regex = "Address: (.+)")
+    abstract fun getAddress(): String?
+}
+```
+
+#### `DataProcessorExtractor.kt` (gerado automaticamente)
+
+```kotlin
+package app
+
+public class DataProcessorExtractor(
+    input: String,
+) : DataProcessor(input) {
+
+    override fun getName(): String? {
+        val match = Regex("Name: (\\w+)").find(input)
+        return match?.groupValues?.get(1)
+    }
+
+    override fun getAddress(): String? {
+        val match = Regex("Address: (.+)").find(input)
+        return match?.groupValues?.get(1)
+    }
+}
+```
+
+#### `MainRegex.kt` (módulo app)
+
+```kotlin
+package app
+
+fun main() {
+    val input = "Name: John Address: 123 Street"
+    val extractor = DataProcessorExtractor(input)
+    println("Name: ${extractor.getName()}")
+    println("Address: ${extractor.getAddress()}")
+}
+```
+
+---
+
 ## 5. Testes e Validação
 
-O projeto foi validado executando a função `main()` e confirmando o output esperado na consola:
+### Secção 1 — GreetingProcessor
+
+Output esperado ao correr `Main.kt`:
 
 ```
 Hello from MyClass!
@@ -147,7 +240,16 @@ Welcome to the compute function!
 Computing something important...
 ```
 
-A classe wrapper imprime corretamente a mensagem de saudação definida na anotação antes de delegar a chamada ao método original, confirmando que o processador de anotações funciona como esperado.
+### Secção 2 — RegexProcessor
+
+Output esperado ao correr `MainRegex.kt`:
+
+```
+Name: John
+Address: 123 Street
+```
+
+Ambos os processadores foram validados com sucesso, confirmando que a geração automática de código em tempo de compilação funciona corretamente.
 
 ---
 
@@ -155,18 +257,20 @@ A classe wrapper imprime corretamente a mensagem de saudação definida na anota
 
 ### Requisitos
 - IntelliJ IDEA
-- JDK 21 ou 23
+- JDK 23
 - Gradle 8.10+
 
 ### Compilar e Executar
 
 1. Clonar o repositório e abrir o projeto no IntelliJ IDEA
 2. Aguardar a sincronização do Gradle (clicar no ícone do elefante)
-3. No terminal, executar a tarefa kapt para gerar a classe wrapper:
+3. No terminal, definir o JAVA_HOME e executar o kapt:
 ```
+$env:JAVA_HOME = "C:\Users\limar\.gradle\jdks\eclipse_adoptium-23-amd64-windows.2"
+$env:PATH = "$env:JAVA_HOME\bin;$env:PATH"
 ./gradlew :app:kaptKotlin
 ```
-4. Executar a função `main()` no ficheiro `Main.kt`
+4. Executar a função `main()` no ficheiro `Main.kt` ou `MainRegex.kt`
 
 ### Notas de Configuração
 - A propriedade `kapt.include.compile.classpath=false` deve estar presente no `gradle.properties`
@@ -192,6 +296,7 @@ As principais dificuldades encontradas durante este tutorial foram:
 - O processamento de anotações é uma ferramenta poderosa para automatizar a geração de código repetitivo em tempo de compilação
 - A estrutura de projeto multi-módulo ajuda a separar as responsabilidades de forma clara
 - As versões do Gradle, Kotlin e JDK devem ser cuidadosamente compatibilizadas para evitar conflitos
+- As expressões regulares com grupos de captura são uma forma eficiente de extrair dados estruturados de strings
 
 ---
 
@@ -199,7 +304,7 @@ As principais dificuldades encontradas durante este tutorial foram:
 
 - Estender o processador `@Greeting` para suportar tipos de retorno diferentes de `Unit`
 - Adicionar suporte para anotar classes inteiras em vez de métodos individuais
-- Implementar o `RegexProcessor` da Secção 2 do tutorial
+- Estender o `RegexProcessor` para suportar múltiplos grupos de captura por método
 - Completar a WeatherApp com MVVM e Jetpack Compose (Secção 3)
 
 ---
@@ -208,4 +313,4 @@ As principais dificuldades encontradas durante este tutorial foram:
 
 _(Preencher de acordo com o uso de ferramentas de IA durante este trabalho, seguindo as indicações AC/AI definidas no enunciado)_
 
-> Nota: A Secção 1 deste tutorial está marcada como **[AC NO, AI NO]** — o uso de autocomplete e assistência por IA não foi permitido.
+> Nota: As Secções 1 e 2 deste tutorial estão marcadas como **[AC NO, AI NO]** — o uso de autocomplete e assistência por IA não foi permitido.
