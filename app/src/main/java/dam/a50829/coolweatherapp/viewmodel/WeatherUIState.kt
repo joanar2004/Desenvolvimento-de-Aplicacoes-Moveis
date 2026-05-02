@@ -23,5 +23,11 @@ data class WeatherUIState(
     val seaLevelPressure: Float = 0f,
 
     // Hora da última atualização — começa vazia
-    val time: String = ""
+    val time: String = "",
+
+    // Controla se a app está a carregar dados da API
+    // Quando true — mostramos o indicador de carregamento na UI
+    // Quando false — mostramos os dados normalmente
+    // Começa a false porque ainda não fizemos nenhum pedido
+    val isLoading: Boolean = false
 )
