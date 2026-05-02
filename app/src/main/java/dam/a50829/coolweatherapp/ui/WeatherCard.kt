@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dam.a50829.coolweatherapp.R
@@ -24,20 +24,17 @@ fun WeatherCard(
     seaLevelPressure: Float,
     time: String
 ) {
-    // Card é um componente do Material Design que desenha um retângulo
-    // com cantos arredondados e sombra
+    // Card semi-transparente para combinar com o gradiente de fundo
+    // copy(alpha = 0.2f) torna a cor branca semi-transparente
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-        // elevation adiciona a sombra por baixo do card
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        // Usamos a cor de superfície do tema atual da app
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = Color.White.copy(alpha = 0.2f)
         )
     ) {
-        // Column organiza os elementos verticalmente (um por baixo do outro)
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
@@ -46,8 +43,6 @@ fun WeatherCard(
             // para suportar múltiplos idiomas
             WeatherRow(
                 label = stringResource(R.string.temperature),
-                // "$temperature" insere o valor na string
-                // \u00B0 é o símbolo de grau (°)
                 value = "$temperature \u00B0C"
             )
             WeatherRow(
@@ -56,7 +51,6 @@ fun WeatherCard(
             )
             WeatherRow(
                 label = stringResource(R.string.wind_direction),
-                // "$windDirection°" mostra a direção em graus
                 value = "$windDirection\u00B0"
             )
             WeatherRow(

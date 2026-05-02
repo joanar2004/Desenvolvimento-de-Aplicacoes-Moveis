@@ -50,6 +50,10 @@ class WeatherViewModel : ViewModel() {
         // Quando a app fechar, o viewModelScope cancela a coroutine automaticamente
         viewModelScope.launch {
 
+            // Ativamos o loading ANTES de chamar a API
+            // Assim a UI mostra imediatamente o indicador de carregamento
+            _uiState.value = _uiState.value.copy(isLoading = true)
+
             // Chamamos a API com as coordenadas atuais do estado
             // Esta chamada é "suspend" — pausa aqui até ter resposta,
             // mas sem bloquear a thread principal (UI continua responsiva)
@@ -74,8 +78,16 @@ class WeatherViewModel : ViewModel() {
                     // firstOrNull() devolve o primeiro elemento da lista,
                     // ou null se a lista estiver vazia
                     // ?: é o "Elvis operator" — se for null usa 0f
-                    seaLevelPressure = it.hourly.pressureMsl.firstOrNull() ?: 0f
+                    seaLevelPressure = it.hourly.pressureMsl.firstOrNull() ?: 0f,
+                    // Desativamos o loading depois de receber os dados com sucesso
+                    isLoading = false
                 )
+            }
+
+            // Se data for null significa que houve um erro (sem internet, API em baixo, etc.)
+            // Mesmo assim desativamos o loading para a UI não ficar presa a carregar
+            if (data == null) {
+                _uiState.value = _uiState.value.copy(isLoading = false)
             }
         }
     }
