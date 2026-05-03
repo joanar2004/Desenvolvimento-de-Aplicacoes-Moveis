@@ -21,6 +21,7 @@ class WeatherViewModel : ViewModel() {
     // 1. Guarda o valor atual do estado
     // 2. Notifica automaticamente quem o estiver a observar quando muda
     // "private" significa que só o ViewModel pode modificar este valor
+    // WeatherUIState() cria uma instância com os valores padrão
     private val _uiState = MutableStateFlow(WeatherUIState())
 
     // StateFlow é a versão "só de leitura" do MutableStateFlow
@@ -52,6 +53,7 @@ class WeatherViewModel : ViewModel() {
 
             // Ativamos o loading ANTES de chamar a API
             // Assim a UI mostra imediatamente o indicador de carregamento
+            // sem esperar pela resposta da API
             _uiState.value = _uiState.value.copy(isLoading = true)
 
             // Chamamos a API com as coordenadas atuais do estado
@@ -64,6 +66,7 @@ class WeatherViewModel : ViewModel() {
 
             // "data?.let { }" só executa o bloco se "data" não for null
             // É a forma segura de trabalhar com valores que podem ser null em Kotlin
+            // O "it" dentro do bloco refere-se ao objeto "data"
             data?.let {
 
                 // Atualizamos o estado com os novos dados da API
@@ -75,10 +78,16 @@ class WeatherViewModel : ViewModel() {
                     winddirection = it.currentWeather.winddirection,
                     weathercode = it.currentWeather.weathercode,
                     time = it.currentWeather.time,
+
                     // firstOrNull() devolve o primeiro elemento da lista,
                     // ou null se a lista estiver vazia
                     // ?: é o "Elvis operator" — se for null usa 0f
                     seaLevelPressure = it.hourly.pressureMsl.firstOrNull() ?: 0f,
+
+                    // isDay == 1 é uma comparação que devolve true se for dia
+                    // e false se for noite (quando isDay == 0)
+                    isDay = it.currentWeather.isDay == 1,
+
                     // Desativamos o loading depois de receber os dados com sucesso
                     isLoading = false
                 )

@@ -18,16 +18,25 @@ data class WeatherUIState(
     // Serão atualizados quando a API responder
     val temperature: Float = 0f,
     val windspeed: Float = 0f,
+
+    // Int não precisa de "f" porque é um número inteiro
     val winddirection: Int = 0,
     val weathercode: Int = 0,
     val seaLevelPressure: Float = 0f,
 
     // Hora da última atualização — começa vazia
+    // String vazia ("") é o valor padrão em Kotlin
     val time: String = "",
 
     // Controla se a app está a carregar dados da API
+    // Boolean só pode ser true ou false
     // Quando true — mostramos o indicador de carregamento na UI
     // Quando false — mostramos os dados normalmente
-    // Começa a false porque ainda não fizemos nenhum pedido
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+
+    // Controla se é dia ou noite no local pesquisado
+    // true = dia, false = noite
+    // Usado para mostrar ícones e cores de fundo diferentes
+    // Começa a true porque Lisboa de manhã é dia por defeito
+    val isDay: Boolean = true
 )

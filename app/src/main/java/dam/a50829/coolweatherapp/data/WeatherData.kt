@@ -32,7 +32,12 @@ data class CurrentWeather(
     val weathercode: Int,
 
     // String é texto (ex: "2025-03-26T14:45")
-    val time: String
+    val time: String,
+
+    // A API devolve 1 se for dia e 0 se for noite
+    // "= 1" é o valor padrão caso a API não devolva este campo
+    // @SerialName mapeia o campo "is_day" do JSON para "isDay" no Kotlin
+    @SerialName("is_day") val isDay: Int = 1
 )
 
 @Serializable

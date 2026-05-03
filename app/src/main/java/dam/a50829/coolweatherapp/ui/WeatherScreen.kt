@@ -3,6 +3,7 @@ package dam.a50829.coolweatherapp.ui
 import android.content.res.Configuration
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -35,69 +37,69 @@ import dam.a50829.coolweatherapp.R
 import dam.a50829.coolweatherapp.viewmodel.WeatherUIState
 import dam.a50829.coolweatherapp.viewmodel.WeatherViewModel
 
-// Função que converte o weathercode num emoji representativo
-// Os códigos seguem o padrão WMO (World Meteorological Organization)
-fun getWeatherEmoji(weathercode: Int): String {
+// Função que converte o weathercode num ID de recurso drawable
+// Agora utiliza TODOS os drawables disponíveis para maior precisão
+fun getWeatherIcon(weathercode: Int, isDay: Boolean): Int {
     return when (weathercode) {
-        0 -> "☀️"           // Céu limpo
-        1, 2 -> "🌤️"       // Principalmente limpo / parcialmente nublado
-        3 -> "☁️"           // Nublado
-        45, 48 -> "🌫️"     // Nevoeiro
-        51, 53, 55 -> "🌦️" // Chuvisco
-        61, 63, 65 -> "🌧️" // Chuva
-        71, 73, 75 -> "❄️"  // Neve
-        80, 81, 82 -> "🌨️" // Aguaceiros
-        95 -> "⛈️"          // Trovoada
-        96, 99 -> "⛈️"      // Trovoada com granizo
-        else -> "🌡️"        // Desconhecido
+        0 -> if (isDay) R.drawable.clear_day else R.drawable.clear_night
+        1 -> if (isDay) R.drawable.mostly_clear_day else R.drawable.mostly_clear_night
+        2 -> if (isDay) R.drawable.partly_cloudy_day else R.drawable.partly_cloudy_night
+        3 -> R.drawable.mostly_cloudy
+        45 -> R.drawable.fog
+        48 -> R.drawable.fog_light
+        51 -> R.drawable.drizzle
+        53, 55 -> R.drawable.rain_light
+        56, 57 -> R.drawable.freezing_drizzle
+        61 -> R.drawable.rain_light
+        63 -> R.drawable.rain
+        65 -> R.drawable.rain_heavy
+        66 -> R.drawable.freezing_rain_light
+        67 -> R.drawable.freezing_rain_heavy
+        71 -> R.drawable.snow_light
+        73 -> R.drawable.snow
+        75 -> R.drawable.snow_heavy
+        77 -> R.drawable.flurries
+        79 -> R.drawable.ice_pellets // Grãos de gelo
+        80 -> R.drawable.rain_light
+        81 -> R.drawable.rain
+        82 -> R.drawable.rain_heavy
+        85 -> R.drawable.snow_light
+        86 -> R.drawable.snow_heavy
+        95, 96, 99 -> R.drawable.tstorm
+        else -> R.drawable.cloudy // Fallback para nublado se for desconhecido
     }
 }
 
-// Função que escolhe as cores do gradiente consoante o weathercode
-// Devolve uma lista de duas cores para o gradiente de fundo
-fun getGradientColors(weathercode: Int): List<Color> {
+// Função que escolhe as cores do gradiente consoante o weathercode e hora do dia
+fun getGradientColors(weathercode: Int, isDay: Boolean): List<Color> {
+    if (!isDay) return listOf(Color(0xFF0D1B2A), Color(0xFF1B2A4A))
+
     return when (weathercode) {
-        0 -> listOf(Color(0xFF1E88E5), Color(0xFF64B5F6))      // Azul claro — sol
-        1, 2 -> listOf(Color(0xFF1976D2), Color(0xFF90CAF9))   // Azul médio — parcialmente nublado
-        3 -> listOf(Color(0xFF546E7A), Color(0xFFB0BEC5))      // Cinzento — nublado
-        45, 48 -> listOf(Color(0xFF607D8B), Color(0xFFCFD8DC)) // Cinzento claro — nevoeiro
-        51, 53, 55,
-        61, 63, 65,
-        80, 81, 82 -> listOf(Color(0xFF1565C0), Color(0xFF5E92F3)) // Azul escuro — chuva
-        71, 73, 75 -> listOf(Color(0xFF4FC3F7), Color(0xFFE1F5FE)) // Azul muito claro — neve
-        95, 96, 99 -> listOf(Color(0xFF37474F), Color(0xFF78909C)) // Cinzento escuro — trovoada
-        else -> listOf(Color(0xFF1E88E5), Color(0xFF64B5F6))   // Default — azul
+        0 -> listOf(Color(0xFF1E88E5), Color(0xFF64B5F6))          // Sol
+        1, 2 -> listOf(Color(0xFF1976D2), Color(0xFF90CAF9))       // Parcialmente nublado
+        3 -> listOf(Color(0xFF546E7A), Color(0xFFB0BEC5))          // Nublado
+        45, 48 -> listOf(Color(0xFF607D8B), Color(0xFFCFD8DC))     // Nevoeiro
+        51, 53, 55, 61, 63, 65, 80, 81, 82 -> listOf(Color(0xFF1565C0), Color(0xFF5E92F3)) // Chuva
+        71, 73, 75, 85, 86 -> listOf(Color(0xFF4FC3F7), Color(0xFFE1F5FE)) // Neve
+        95, 96, 99 -> listOf(Color(0xFF37474F), Color(0xFF78909C)) // Trovoada
+        else -> listOf(Color(0xFF1E88E5), Color(0xFF64B5F6))
     }
 }
 
-// Composable principal — é este que o MainActivity vai chamar
 @Composable
 fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
-
-    // collectAsState() transforma o StateFlow do ViewModel
-    // numa variável que o Compose consegue observar
     val uiState by weatherViewModel.uiState.collectAsState()
-
-    // Obtemos as cores do gradiente baseadas no weathercode atual
-    val gradientColors = getGradientColors(uiState.weathercode)
-
-    // LocalConfiguration dá-nos informação sobre o dispositivo
+    val gradientColors = getGradientColors(uiState.weathercode, uiState.isDay)
     val configuration = LocalConfiguration.current
 
-    // Box permite sobrepor elementos — usamos para o gradiente de fundo
     Box(
         modifier = Modifier
             .fillMaxSize()
-            // Brush.verticalGradient cria um gradiente de cima para baixo
-            // com as cores que escolhemos baseadas no tempo
             .background(
                 brush = Brush.verticalGradient(colors = gradientColors)
             )
     ) {
-        // Se estiver a carregar mostramos o indicador no centro
-        // Caso contrário mostramos o conteúdo normal
         if (uiState.isLoading) {
-            // CircularProgressIndicator é o "spinner" de loading do Material Design
             CircularProgressIndicator(
                 modifier = Modifier.align(Alignment.Center),
                 color = Color.White
@@ -107,14 +109,10 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
                 LandscapeWeatherUI(
                     uiState = uiState,
                     onLatitudeChange = { newValue ->
-                        newValue.toFloatOrNull()?.let {
-                            weatherViewModel.updateLatitude(it)
-                        }
+                        newValue.toFloatOrNull()?.let { weatherViewModel.updateLatitude(it) }
                     },
                     onLongitudeChange = { newValue ->
-                        newValue.toFloatOrNull()?.let {
-                            weatherViewModel.updateLongitude(it)
-                        }
+                        newValue.toFloatOrNull()?.let { weatherViewModel.updateLongitude(it) }
                     },
                     onUpdateButtonClick = { weatherViewModel.fetchWeather() }
                 )
@@ -122,14 +120,10 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
                 PortraitWeatherUI(
                     uiState = uiState,
                     onLatitudeChange = { newValue ->
-                        newValue.toFloatOrNull()?.let {
-                            weatherViewModel.updateLatitude(it)
-                        }
+                        newValue.toFloatOrNull()?.let { weatherViewModel.updateLatitude(it) }
                     },
                     onLongitudeChange = { newValue ->
-                        newValue.toFloatOrNull()?.let {
-                            weatherViewModel.updateLongitude(it)
-                        }
+                        newValue.toFloatOrNull()?.let { weatherViewModel.updateLongitude(it) }
                     },
                     onUpdateButtonClick = { weatherViewModel.fetchWeather() }
                 )
@@ -138,12 +132,8 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
     }
 }
 
-// Composable para mostrar o ícone do tempo e a temperatura em grande
 @Composable
-fun WeatherHero(weathercode: Int, temperature: Float) {
-
-    // animateFloatAsState anima suavemente a temperatura quando muda
-    // tween(600) significa que a animação dura 600 milissegundos
+fun WeatherHero(weathercode: Int, temperature: Float, isDay: Boolean) {
     val animatedTemp by animateFloatAsState(
         targetValue = temperature,
         animationSpec = tween(durationMillis = 600),
@@ -154,14 +144,12 @@ fun WeatherHero(weathercode: Int, temperature: Float) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(16.dp)
     ) {
-        // Emoji do tempo em tamanho grande
-        Text(
-            text = getWeatherEmoji(weathercode),
-            fontSize = 80.sp
+        Image(
+            painter = painterResource(id = getWeatherIcon(weathercode, isDay)),
+            contentDescription = null,
+            modifier = Modifier.size(120.dp)
         )
 
-        // Temperatura em destaque com valor animado
-        // "%.1f" formata o número com 1 casa decimal (ex: 14.5)
         Text(
             text = "%.1f°C".format(animatedTemp),
             fontSize = 64.sp,
@@ -171,7 +159,6 @@ fun WeatherHero(weathercode: Int, temperature: Float) {
     }
 }
 
-// Layout para modo retrato (vertical)
 @Composable
 fun PortraitWeatherUI(
     uiState: WeatherUIState,
@@ -189,10 +176,10 @@ fun PortraitWeatherUI(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        // Ícone do tempo e temperatura em grande no topo
         WeatherHero(
             weathercode = uiState.weathercode,
-            temperature = uiState.temperature
+            temperature = uiState.temperature,
+            isDay = uiState.isDay
         )
 
         CoordinatesCard(
@@ -214,7 +201,6 @@ fun PortraitWeatherUI(
         Button(
             onClick = onUpdateButtonClick,
             modifier = Modifier.fillMaxWidth(),
-            // Botão semi-transparente branco para combinar com o gradiente
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.White.copy(alpha = 0.3f),
                 contentColor = Color.White
@@ -229,7 +215,6 @@ fun PortraitWeatherUI(
     }
 }
 
-// Layout para modo paisagem (horizontal)
 @Composable
 fun LandscapeWeatherUI(
     uiState: WeatherUIState,
@@ -244,7 +229,6 @@ fun LandscapeWeatherUI(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Coluna da esquerda — ícone, temperatura, coordenadas e botão
         Column(
             modifier = Modifier.weight(1f),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -252,7 +236,8 @@ fun LandscapeWeatherUI(
         ) {
             WeatherHero(
                 weathercode = uiState.weathercode,
-                temperature = uiState.temperature
+                temperature = uiState.temperature,
+                isDay = uiState.isDay
             )
 
             CoordinatesCard(
@@ -278,7 +263,6 @@ fun LandscapeWeatherUI(
             }
         }
 
-        // Coluna da direita — dados meteorológicos
         Column(
             modifier = Modifier.weight(1f)
         ) {
