@@ -1,7 +1,22 @@
 plugins {
-    kotlin("jvm") version "2.3.0" apply false
-    kotlin("kapt") version "2.3.0" apply false
+    kotlin("jvm") version "2.3.0"
 }
 
 group = "org.example"
 version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(kotlin("test"))
+}
+
+kotlin {
+    jvmToolchain(25)
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
