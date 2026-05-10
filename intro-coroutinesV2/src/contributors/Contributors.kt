@@ -113,7 +113,27 @@ interface Contributors: CoroutineScope {
         }
     }
 
-    private enum class LoadingStatus { COMPLETED, CANCELED, IN_PROGRESS }
+    /*
+    Enum que representa os possíveis estados do carregamento
+    INIT - estado inicial, antes de qualquer carregamento começar
+    IN_PROGRESS - carregamento em curso
+    COMPLETED - carregamento cncluído com sucesso
+    CANCELED - carregamento cancelado pelo utilizador
+     */
+    enum class LoadingStatus { INIT, COMPLETED, CANCELED, IN_PROGRESS }
+
+    /*
+    Data class que agrupa toda a informaçao sobre o estado atual do carregamento, em vez de passar parâmetros soltos,
+    agrupamos tudo num único objeto
+    status - o estado atual (INIT, IN_PROGRESS, COMPLETED, CANCELED)
+    startTime - o momento em que o carregamento começou (null se ainda não começou)
+    elapsedTime - o tempo decorrido formatado como string
+     */
+    data class LoadingStateData(
+        val status: LoadingStatus = LoadingStatus.INIT, // Por defeito começa no estado INIT
+        val startTime: Long? = null, // Null porque ainda não começou
+        val elapsedTime: String = "" // vazio porque ainda não há tempo
+    )
 
     private fun clearResults() {
         updateContributors(listOf())
@@ -147,6 +167,8 @@ interface Contributors: CoroutineScope {
                     COMPLETED -> "completed in $time"
                     IN_PROGRESS -> "in progress $time"
                     CANCELED -> "canceled"
+                    // Adicionar o estado INIT, mostrado quando a app arranca
+                    INIT -> "init"
                 }
         setLoadingStatus(text, status == IN_PROGRESS)
     }
