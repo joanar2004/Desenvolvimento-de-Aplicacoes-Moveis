@@ -3,6 +3,8 @@ package contributors
 import contributors.Contributors.LoadingStatus.*
 import contributors.Variant.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import tasks.*
 import java.awt.event.ActionListener
 import javax.swing.SwingUtilities
@@ -23,6 +25,13 @@ enum class Variant {
 interface Contributors: CoroutineScope {
 
     val job: Job
+
+    /*
+    Propriedade imutável que expõe o estado atual do carregamento como um Flow.
+    Qualquer componente pode observar este flow mas não pode modificá-lo diretamente , assim, o StateFlow é um flow
+    "quente" - mantém sempre o último valor emitido.
+     */
+    val loadingState: StateFlow<LoadingStateData>
 
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main

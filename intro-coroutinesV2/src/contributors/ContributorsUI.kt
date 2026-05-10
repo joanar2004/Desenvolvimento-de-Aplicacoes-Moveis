@@ -1,6 +1,9 @@
 package contributors
 
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import java.awt.Dimension
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
@@ -33,6 +36,21 @@ class ContributorsUI : JFrame("GitHub Contributors"), Contributors {
     private val loadingStatus = JLabel("Start new loading", loadingIcon, SwingConstants.CENTER)
 
     override val job = Job()
+
+
+    /*
+    Propriedade privada e mutável.
+    Apenas esta classe pode alterar o estado e cmeça com o estado INIT (estado inicial).
+    Semore que o seu valor muda, gera automaticamente um novo item no flow.
+     */
+    private val _loadingState = MutableStateFlow(Contributors.LoadingStateData())
+
+
+    /*
+    Propriedade pública e imutável ou seja, o exterior apenas pode observar e não modificar.
+    asStateFlow() converye o mUtabçeStateFlow num StateFlow imutável e é isto que os outros componentes veem e observam
+     */
+    override val loadingState: StateFlow<Contributors.LoadingStateData> = _loadingState.asStateFlow()
 
     init {
         // Create UI
