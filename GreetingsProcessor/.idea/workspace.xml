@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b432da2e-2adc-4c08-be26-bb0c3befd0df" name="Changes" comment="commit 1">
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GreetingProcessorProject/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GreetingProcessorProject/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GreetingProcessorProject/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/annotations/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../GreetingProcessorProject/annotations/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/annotations/src/main/kotlin/Extract.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/annotations/src/main/kotlin/Greeting.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../GreetingProcessorProject/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/app/src/main/kotlin/DataProcessor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/app/src/main/kotlin/Main.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/app/src/main/kotlin/MainRegex.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/app/src/main/kotlin/MyClass.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../GreetingProcessorProject/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../GreetingProcessorProject/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/processor/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../GreetingProcessorProject/processor/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/processor/src/main/kotlin/GreetingProcessor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/processor/src/main/kotlin/RegexProcessor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GreetingProcessorProject/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../GreetingProcessorProject/settings.gradle.kts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="C:\Users\limar\.gradle\wrapper\dists\gradle-9.2.0-bin\11i5gvueggl8a5cioxuftxrik\gradle-9.2.0" javaHome="C:\Program Files\Java\jdk-25.0.2" gradleVersion="9.2.0" />
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="3DEVeJjyyKUMXm1AdgXkQBD4Zo1" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.30387.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b432da2e-2adc-4c08-be26-bb0c3befd0df" name="Changes" comment="" />
+      <created>1777847313160</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1777847313160</updated>
+      <workItem from="1777847314403" duration="418000" />
+      <workItem from="1777847947975" duration="812000" />
+      <workItem from="1778056712298" duration="32000" />
+    </task>
+    <task id="LOCAL-00001" summary="commit 1">
+      <option name="closed" value="true" />
+      <created>1777847469105</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1777847469105</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="commit 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit 1" />
+  </component>
+</project>

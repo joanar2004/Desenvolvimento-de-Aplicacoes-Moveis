@@ -84,13 +84,22 @@ class Pipeline {
     }
 }
 
-// Função top-level (fora de qualquer classe) que usa o padrão DSL Builder do Kotlin.
-// O tipo 'Pipeline.() -> Unit' é uma "lambda com receiver" — dentro do bloco, 'this' é o Pipeline.
-// Isto significa que podemos chamar addStage, compose, etc. directamente sem escrever 'p.addStage(...)'.
-fun buildPipeline(config: Pipeline.() -> Unit): Pipeline {
+
+ //Cria e configura uma nova instância de Pipeline.
+ //param config Uma função (lambda) que recebe um Pipeline como argumento e não devolve nada (Unit).
+ // É aqui que são definidas as etapas (stages) da pipeline.
+ // return O objeto Pipeline já configurado.
+
+fun buildPipeline(config: (Pipeline) -> Unit): Pipeline {
+    // 1. Instanciação: Criamos o objeto que vai ser configurado.
     val p = Pipeline()
-    // p.config() executa o bloco que o utilizador escreveu, com p como receiver.
-    // É como se o código dentro do bloco estivesse a ser executado dentro da própria classe Pipeline.
-    p.config()
+
+    // 2. Configuração: Chamamos a função 'config' passando o nosso objeto 'p'.
+    // O código que escreves dentro das chavetas { ... } no main é executado aqui.
+    // O 'it' que usas lá no main representa este objeto 'p' que estamos a passar.
+    config(p)
+
+    // 3. Entrega: Depois de correr todas as instruções (addStage, compose, etc.),
+    // devolvemos o objeto pronto para ser usado.
     return p
 }

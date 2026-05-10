@@ -37,16 +37,16 @@ fun main() {
 
     // Testar o Desafio
     val p1 = buildPipeline {
-        addStage("Trim") { it.map { s -> s.trim() } }
-        addStage("Upper") { it.map { s -> s.uppercase() } }
+        it.addStage("Trim") { it.map { s -> s.trim() } }
+        it.addStage("Upper") { it.map { s -> s.uppercase() } }
 
         // Compor Trim + Upper numa única etapa chamada "LimpezaTotal"
-        compose("Trim", "Upper", "LimpezaTotal")
+        it.compose("Trim", "Upper", "LimpezaTotal")
     }
 
 
     val p2 = buildPipeline {
-        addStage("ApenasErros") { lista ->
+        it.addStage("ApenasErros") { lista ->
             lista.filter { it.contains("error", ignoreCase = true) }
         }
     }
