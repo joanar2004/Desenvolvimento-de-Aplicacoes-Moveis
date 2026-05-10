@@ -4,6 +4,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import java.awt.Dimension
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
@@ -75,6 +76,36 @@ class ContributorsUI : JFrame("GitHub Contributors"), Contributors {
         // Initialize actions
         init()
     }
+    /*
+    Emite um novo estado para o StateFlow e qualquer coletor que esteja a observar loadingState vai receber este novo
+    valor.
+     */
+    override fun updateLoadingStatus(newStatus: Contributors.LoadingStateData){
+        _loadingState.value = newStatus
+    }
+
+    /*
+    Lança uma coroutine que observa o loadingState flow e sempre que o estado muda, ele atualiza o texto e o ícone na UI
+     */
+    override fun observeLoadingStatus() {
+        launch{
+            loadingState.collect {status ->
+                // Formata o texto consoante o estado atual
+                val text = "Loading status: " + when (status.status) {
+                    Contributors.LoadingStatus.COMPLETED -> "completed in ${status.elapsedTime}"
+                    Contributors.LoadingStatus.IN_PROGRESS -> "in progress ${status.elapsedTime}"
+                    Contributors.LoadingStatus.CANCELED -> "canceled"
+                    Contributors.LoadingStatus.INIT -> "init"
+                }
+                // Atualiza o texto do label na UI
+                loadingStatus.text = text
+
+                // Mostra o ícone de loading apenas quando está em progresso
+                loadingStatus.icon = if(status.status == Contributors.LoadingStatus.IN_PROGRESS) loadingIcon else null
+            }
+        }
+    }
+
 
     override fun getSelectedVariant(): Variant = variant.getItemAt(variant.selectedIndex)
 
