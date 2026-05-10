@@ -3,6 +3,7 @@ package contributors
 import contributors.Contributors.LoadingStatus.*
 import contributors.Variant.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.StateFlow
 import tasks.*
 import java.awt.event.ActionListener
@@ -126,8 +127,35 @@ interface Contributors: CoroutineScope {
             }
             CHANNELS -> { // Performing requests concurrently and showing progress
                 launch(Dispatchers.Default) {
-                    loadContributorsChannels(service, req) { users, completed ->
+                    /*
+                    Cria um channel com buffer para a comunicação entre o produtor e o consumidor.
+                    O buffer permite que o produtor envie dados sem esperar que o consumidor os processe
+                    Pair<List<User>, Boolean>: a lista de utilizadores e se está completo ou não
+                     */
+                    val progressChannel = Channel<Pair<List<User>, Boolean>>(Channel.BUFFERED)
+
+                    /*
+                    Produtor: lança uma coroutine que carrega os contrbuidores e envvia para o channel e quando termina,
+                    fecha o channel para sinalizar que não há mais dados
+                    */
+                    launch(Dispatchers.Default) {
+                        loadContributorsChannels(service, req) { users, completed ->
+                            /*
+                            Envia os dados para o channel em vez de atualizar a UI diretamente, isto separa a lógica de
+                            carregamento da lógica de atualização da UI
+                             */
+                            progressChannel.send(Pair(users, completed))
+                        }
+                        progressChannel.close() // Fecha o channel quando todos os dados foram enviados
+                    }
+
+                    /*
+                    Consumidor:lê o channel e atualiza a UI para cada resultado recebido, o for suspende automaticamente
+                    quando não há dados disponíveis e termina quando o channel é fechado
+                     */
+                    for ((users, completed) in progressChannel) {
                         withContext(Dispatchers.Main) {
+                            //Volta para a thread da UI para atualizar os resultados
                             updateResults(users, startTime, completed)
                         }
                     }
