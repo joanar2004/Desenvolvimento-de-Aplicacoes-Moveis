@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1042843570851",
+    "project_id": "dam-notespro",
+    "storage_bucket": "dam-notespro.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042843570851:android:95d11fe8a441d8ad07a516",
+        "android_client_info": {
+          "package_name": "com.notes.notesproxmlviews"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkDyOXLef8WD5F14J6Hr6i_ByXAorrOio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
