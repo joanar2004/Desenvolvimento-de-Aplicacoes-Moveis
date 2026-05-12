@@ -82,7 +82,7 @@ class AIAssistantGeminiClasses(override val properties: Properties) : AIAssistan
 
         // Configure the HTTP request with proper headers and authentication
         val request = Request.Builder()
-            .url("https://generativelanguage.googleapis.com/v1/models/$model:generateContent?key=$apiKey")  // Gemini API endpoint
+            .url("https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey")  // Gemini API endpoint
             .addHeader("Content-Type", "application/json")  // Specify content type
             .post(requestBody.toRequestBody("application/json".toMediaTypeOrNull()))  // Set the request body
             .build()

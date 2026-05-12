@@ -31,6 +31,8 @@ dependencies {
 tasks.withType<JavaExec> {
     // Suppress SLF4J initialization messages
     systemProperty("org.slf4j.simpleLogger.defaultLogLevel", "off")
+    // permite input do utilizador quando corre via Gradle
+    standardInput = System.`in`
 }
 
 tasks.test {
