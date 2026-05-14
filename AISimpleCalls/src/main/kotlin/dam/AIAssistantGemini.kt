@@ -7,37 +7,31 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
 
-/**
- * GeminiAIAssistant class provides an interface to communicate with Google's Gemini AI models.
- * This class handles API authentication, request formatting, response parsing, and error handling.
- * It implements retry logic for rate-limited requests and validates JSON responses.
- *
- * @param properties Properties containing the API key for authentication with Gemini services
- */
 class AIAssistantGemini(override val properties: Properties) : AIAssistant {
 
     override fun getSystem() = "GEMINI"
     override val apiKeyName = "GEMINI_API_KEY"
 
-    // Model selection - different models have different capabilities and costs
-    //  override var model = "gemini-1.0-pro" // NOK - Primary model for most tasks
-    // override var model = "gemini-1.0-ultra" // NOK - Most capable model (if available)
-    // override var model = "gemini-1.5-flash" // OK - Faster, less expensive
-    // override var model = "gemini-1.5-pro" // OK - Primary model for most tasks
-     override var model = "gemini-2.0-flash" // OK - Most capable model (if available)
-    // override var model = "gemini-2.0-pro" // NOK - Most capable model (if available)
-    // override var model = "gemini-2.5-flash" // NOK - Most capable model (if available)
-    // override var model = "gemini-2.5-flash-preview" // NOK - Most capable model (if available) //override var model = "gemini-2.5-flash-preview-04-17" // NOK - Most capable model (if available)
+    override var model = "gemini-2.0-flash"
 
-    /**
-     * Constructs and formats a structured request from the given input prompt.
-     * This method is intended to prepare the necessary request structure for
-     * sending to an AI-powered model or API.
-     *
-     * @param prompt The user's input query or prompt that needs to be formatted into a request
-     */
     override fun buildRequest(prompt: String): Request {
-        // Create the content array with the parts of the prompt
+
+        // lê a temperatura do ficheiro config.properties
+        // a temperatura controla a criatividade das respostas:
+        //   - valor baixo (0.0-0.3): respostas mais determinísticas e previsíveis
+        //   - valor médio (0.4-0.7): equilíbrio entre determinismo e criatividade
+        //   - valor alto (0.8-1.0): respostas mais criativas e variadas
+        // toDoubleOrNull() converte a string para Double — se não estiver definida no
+        // config.properties ou for inválida, devolve null e usamos 0.7 como valor por defeito
+        val temperature = properties.getProperty("TEMPERATURE")?.toDoubleOrNull() ?: 0.7
+
+        // lê o max tokens do ficheiro config.properties
+        // max tokens controla o tamanho máximo da resposta
+        // toIntOrNull() converte a string para Int — se não estiver definida no
+        // config.properties ou for inválida, devolve null e usamos 800 como valor por defeito
+        val maxTokens = properties.getProperty("MAX_TOKENS")?.toIntOrNull() ?: 800
+
+        // cria o array de conteúdo com o prompt do utilizador
         val messagesArray = JSONArray()
             .put(
                 JSONObject()
@@ -45,16 +39,22 @@ class AIAssistantGemini(override val properties: Properties) : AIAssistant {
                     .put("parts", JSONArray().put(JSONObject().put("text", prompt)))
             )
 
-        // Build the complete request body with model selection and content
+        // cria o objeto de configuração da geração com os valores lidos do config.properties
+        val generationConfig = JSONObject()
+            .put("temperature", temperature) // valor lido do config.properties (ou 0.7 por defeito)
+            .put("maxOutputTokens", maxTokens) // valor lido do config.properties (ou 800 por defeito)
+
+        // constrói o corpo completo do pedido
         val requestBody = JSONObject()
             .put("contents", messagesArray)
-            .toString()  // Convert to JSON string
+            .put("generationConfig", generationConfig)
+            .toString()
 
-        // Configure the HTTP request with proper headers and authentication
+        // configura o pedido HTTP com os headers e autenticação corretos
         val request = Request.Builder()
-            .url("https://generativelanguage.googleapis.com/v1/models/$model:generateContent?key=$apiKey")  // Gemini API endpoint
-            .addHeader("Content-Type", "application/json")  // Specify content type
-            .post(requestBody.toRequestBody("application/json".toMediaTypeOrNull()))  // Set the request body
+            .url("https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey")
+            .addHeader("Content-Type", "application/json")
+            .post(requestBody.toRequestBody("application/json".toMediaTypeOrNull()))
             .build()
         return request
     }

@@ -35,11 +35,28 @@ class AIAssistantKimi(override val properties: Properties) : AIAssistant {
                 .put("content", prompt)
         )
 
+        // lê a temperatura do ficheiro config.properties
+        // a temperatura controla a criatividade das respostas:
+        //   - valor baixo (0.0-0.3): respostas mais determinísticas e previsíveis
+        //   - valor médio (0.4-0.7): equilíbrio entre determinismo e criatividade
+        //   - valor alto (0.8-1.0): respostas mais criativas e variadas
+        // toDoubleOrNull() converte a string para Double — se não estiver definida no
+        // config.properties ou for inválida, devolve null e usamos 1.0 como valor por defeito
+        val temperature = properties.getProperty("TEMPERATURE")?.toDoubleOrNull() ?: 1.0
+
+        // lê o max tokens do ficheiro config.properties
+        // max tokens controla o tamanho máximo da resposta:
+        //   - valor baixo: respostas mais curtas
+        //   - valor alto: respostas mais longas e detalhadas
+        // toIntOrNull() converte a string para Int — se não estiver definida no
+        // config.properties ou for inválida, devolve null e usamos 16384 como valor por defeito
+        val maxTokens = properties.getProperty("MAX_TOKENS")?.toIntOrNull() ?: 16384
+
         val requestBody = JSONObject()
             .put("model", model)
             .put("messages", messagesArray)
-            .put("max_tokens", 16384)
-            .put("temperature", 1.0)
+            .put("max_tokens", maxTokens)    // valor lido do config.properties (ou 16384 por defeito)
+            .put("temperature", temperature) // valor lido do config.properties (ou 1.0 por defeito)
             .put("top_p", 1.0)
             .put("stream", false)
             .put("chat_template_kwargs", JSONObject().put("thinking", true))

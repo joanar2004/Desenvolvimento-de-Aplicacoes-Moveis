@@ -18,26 +18,12 @@ class AIAssistantGeminiClasses(override val properties: Properties) : AIAssistan
     override fun getSystem() = "GEMINI"
     override val apiKeyName = "GEMINI_API_KEY"
 
-    // Model selection - different models have different capabilities and costs
-    //  override var model = "gemini-1.0-pro" // NOK - Primary model for most tasks
-    // override var model = "gemini-1.0-ultra" // NOK - Most capable model (if available)
-    // override var model = "gemini-1.5-flash" // OK - Faster, less expensive
-    // override var model = "gemini-1.5-pro" // OK - Primary model for most tasks
-     override var model = "gemini-2.0-flash" // OK - Most capable model (if available)
-    // override var model = "gemini-2.0-pro" // NOK - Most capable model (if available)
-    // override var model = "gemini-2.5-flash" // NOK - Most capable model (if available)
-    // override var model = "gemini-2.5-flash-preview" // NOK - Most capable model (if available) //override var model = "gemini-2.5-flash-preview-04-17" // NOK - Most capable model (if available)
+    override var model = "gemini-2.0-flash"
 
-    // Data classes for Gemini API request structure
+    // Data classes para estruturar o pedido à API do Gemini
+    data class Part(val text: String)
 
-    data class Part(
-        val text: String
-    )
-
-    data class Content(
-        val role: String,
-        val parts: List<Part>
-    )
+    data class Content(val role: String, val parts: List<Part>)
 
     data class GeminiRequest(
         val contents: List<Content>,
@@ -45,46 +31,55 @@ class AIAssistantGeminiClasses(override val properties: Properties) : AIAssistan
     )
 
     data class GenerationConfig(
-        val temperature: Double? = 0.4,      // Default reasonable balance
-        val topK: Int? = 40,                 // Limits selection to top K most likely tokens
-        val topP: Double? = 0.95,            // Nucleus sampling - covers 95% of probability mass
-        val maxOutputTokens: Int? = 800,     // Controls response length
-        val candidateCount: Int? = 1         // Number of alternative responses to generate
+        val temperature: Double? = 0.4,      // controla a criatividade das respostas
+        val topK: Int? = 40,                 // limita a seleção aos K tokens mais prováveis
+        val topP: Double? = 0.95,            // nucleus sampling — cobre 95% da massa de probabilidade
+        val maxOutputTokens: Int? = 800,     // controla o tamanho máximo da resposta
+        val candidateCount: Int? = 1         // número de respostas alternativas a gerar
     )
 
-
-    // Gson instance for JSON serialization
+    // instância do Gson para serialização JSON
     private val gson = Gson()
 
-    /**
-     * Constructs and formats a structured request from the given input prompt.
-     * This method is intended to prepare the necessary request structure for
-     * sending to an AI-powered model or API.
-     *
-     * @param prompt The user's input query or prompt that needs to be formatted into a request
-     */
     override fun buildRequest(prompt: String): Request {
-        // Create request structure using data classes
-        val part = Part(text = prompt)
-        val content = Content(
-            role = "user",
-            parts = listOf(part)
-        )
-        val geminiRequest = GeminiRequest(
-            contents = listOf(content)
-            , generationConfig = GenerationConfig(
-                temperature = 0.7,
-                maxOutputTokens = 800
-        ))
 
-        // Convert to JSON string using Gson
+        // lê a temperatura do ficheiro config.properties
+        // a temperatura controla a criatividade das respostas:
+        //   - valor baixo (0.0-0.3): respostas mais determinísticas e previsíveis
+        //   - valor médio (0.4-0.7): equilíbrio entre determinismo e criatividade
+        //   - valor alto (0.8-1.0): respostas mais criativas e variadas
+        // toDoubleOrNull() converte a string para Double — se não estiver definida no
+        // config.properties ou for inválida, devolve null e usamos 0.7 como valor por defeito
+        val temperature = properties.getProperty("TEMPERATURE")?.toDoubleOrNull() ?: 0.7
+
+        // lê o max tokens do ficheiro config.properties
+        // max tokens controla o tamanho máximo da resposta
+        // toIntOrNull() converte a string para Int — se não estiver definida no
+        // config.properties ou for inválida, devolve null e usamos 800 como valor por defeito
+        val maxTokens = properties.getProperty("MAX_TOKENS")?.toIntOrNull() ?: 800
+
+        // cria a estrutura do pedido usando data classes
+        val part = Part(text = prompt)
+        val content = Content(role = "user", parts = listOf(part))
+
+        // cria o pedido com os valores de temperatura e max tokens lidos do config.properties
+        // em vez de valores fixos no código, agora são configuráveis externamente
+        val geminiRequest = GeminiRequest(
+            contents = listOf(content),
+            generationConfig = GenerationConfig(
+                temperature = temperature,   // valor lido do config.properties (ou 0.7 por defeito)
+                maxOutputTokens = maxTokens  // valor lido do config.properties (ou 800 por defeito)
+            )
+        )
+
+        // converte o pedido para JSON usando Gson
         val requestBody = gson.toJson(geminiRequest)
 
-        // Configure the HTTP request with proper headers and authentication
+        // configura o pedido HTTP com os headers e autenticação corretos
         val request = Request.Builder()
-            .url("https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey")  // Gemini API endpoint
-            .addHeader("Content-Type", "application/json")  // Specify content type
-            .post(requestBody.toRequestBody("application/json".toMediaTypeOrNull()))  // Set the request body
+            .url("https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey")
+            .addHeader("Content-Type", "application/json")
+            .post(requestBody.toRequestBody("application/json".toMediaTypeOrNull()))
             .build()
         return request
     }

@@ -20,53 +20,56 @@ class AIAssistantOpenAI(override val properties: Properties) : AIAssistant {
     override val apiKeyName = "OPENAI_API_KEY"
 
     // Model selection - uncomment the desired model
-    // Different models have different capabilities, costs, and response characteristics
-    // private var model = "gpt-3.5-turbo" // OK - Faster, less expensive, good for most tasks
-    //private var model = "gpt-4"  // OK - More capable, better reasoning, more expensive
-    // private var model = "o1"  // OK - Multi-modal model, can handle images
-    override var model = "gpt-4o" //  OK - Optimized version of GPT-4
-    // private var model = "o3-mini" // OK - Smaller, faster version with reduced capabilities
-    // private var model = "gpt-4o-mini" // OK - Smaller optimized model
-    // private var model = "o3-mini-high" // not working - an Experimental model
-    // private var model = "gpt-4.5" // not working - Future model not yet available
+    override var model = "gpt-4o"
 
-
-    /**
-     * Constructs and formats a structured request from the given input prompt.
-     * This method is intended to prepare the necessary request structure for
-     * sending to an AI-powered model or API.
-     *
-     * @param prompt The user's input query or prompt that needs to be formatted into a request
-     */
     override fun buildRequest(prompt: String): Request {
-        // Create the message array with system instructions and user content
-        // This follows OpenAI's expected format for chat completions
+
+        // lê a temperatura do ficheiro config.properties
+        // a temperatura controla a criatividade das respostas:
+        //   - valor baixo (0.0-0.3): respostas mais determinísticas e previsíveis
+        //   - valor médio (0.4-0.7): equilíbrio entre determinismo e criatividade
+        //   - valor alto (0.8-1.0): respostas mais criativas e variadas
+        // toDoubleOrNull() converte a string para Double — se não estiver definida no
+        // config.properties ou for inválida, devolve null e usamos 0.7 como valor por defeito
+        val temperature = properties.getProperty("TEMPERATURE")?.toDoubleOrNull() ?: 0.7
+
+        // lê o max tokens do ficheiro config.properties
+        // max tokens controla o tamanho máximo da resposta
+        // toIntOrNull() converte a string para Int — se não estiver definida no
+        // config.properties ou for inválida, devolve null e usamos 800 como valor por defeito
+        val maxTokens = properties.getProperty("MAX_TOKENS")?.toIntOrNull() ?: 800
+
+        // cria o array de mensagens com as instruções do sistema e o conteúdo do utilizador
+        // segue o formato esperado pela API do OpenAI para chat completions
         val messagesArray = JSONArray()
             .put(
-                // System message sets the behavior and personality of the assistant
+                // mensagem de sistema define o comportamento e personalidade do assistente
                 JSONObject()
                     .put("role", "system")
                     .put("content", "You are a friendly and helpful assistant.")
             )
             .put(
-                // User message contains the actual query from the user
+                // mensagem do utilizador contém a pergunta atual
                 JSONObject()
                     .put("role", "user")
                     .put("content", prompt)
             )
 
-        // Build the complete request body with model selection and messages
+        // constrói o corpo completo do pedido com o modelo, mensagens,
+        // temperatura e max tokens lidos do config.properties
         val requestBody = JSONObject()
-            .put("model", model)  // Specify which model to use
+            .put("model", model)
             .put("messages", messagesArray)
-            .toString()  // Convert to JSON string
+            .put("temperature", temperature)  // valor lido do config.properties (ou 0.7 por defeito)
+            .put("max_tokens", maxTokens)     // valor lido do config.properties (ou 800 por defeito)
+            .toString()
 
-        // Configure the HTTP request with proper headers and authentication
+        // configura o pedido HTTP com os headers e autenticação corretos
         val request = Request.Builder()
-            .url("https://api.openai.com/v1/chat/completions")  // OpenAI chat endpoint
-            .addHeader("Authorization", "Bearer $apiKey")  // API key authentication
-            .addHeader("Content-Type", "application/json")  // Specify content type
-            .post(requestBody.toRequestBody("application/json".toMediaTypeOrNull()))  // Set the request body
+            .url("https://api.openai.com/v1/chat/completions")
+            .addHeader("Authorization", "Bearer $apiKey")
+            .addHeader("Content-Type", "application/json")
+            .post(requestBody.toRequestBody("application/json".toMediaTypeOrNull()))
             .build()
         return request
     }
