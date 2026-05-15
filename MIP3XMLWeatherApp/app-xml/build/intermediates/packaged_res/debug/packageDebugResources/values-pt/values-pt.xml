@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MIP3 Meteorologia</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="pressure">Pressão: %1$.1f hPa</string>
+    <string name="temperature">%1$.1f °C</string>
+    <string name="time">Hora: %1$s</string>
+    <string name="update_weather">Atualizar Meteorologia</string>
+    <string name="weather_code">Código Meteorológico: %1$d</string>
+    <string name="wind_direction">Direção do Vento: %1$.0f°</string>
+    <string name="wind_speed">Velocidade do Vento: %1$.1f km/h</string>
+</resources>
