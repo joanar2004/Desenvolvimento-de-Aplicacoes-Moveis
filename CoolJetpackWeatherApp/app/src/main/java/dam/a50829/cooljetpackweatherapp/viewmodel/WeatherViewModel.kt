@@ -1,0 +1,104 @@
+package dam.a50829.cooljetpackweatherapp.viewmodel
+
+
+// ViewModel é uma classe do Android Jetpack que sobrevive a rotações do ecrã
+// Sem ViewModel, ao rodar o telemóvel a Activity reiniciava e perdias os dados
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+
+import dam.a50829.cooljetpackweatherapp.data.WeatherApiClient
+
+// kotlinx.coroutines permite fazer operações assíncronas (ex: chamar APIs)
+// sem bloquear a interface gráfica
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+
+// Herdamos de ViewModel() para ter acesso ao viewModelScope e
+// à sobrevivência a rotações de ecrã
+class WeatherViewModel : ViewModel() {
+
+    // MutableStateFlow é um "contentor" de estado que:
+    // 1. Guarda o valor atual do estado
+    // 2. Notifica automaticamente quem o estiver a observar quando muda
+    // "private" significa que só o ViewModel pode modificar este valor
+    // WeatherUIState() cria uma instância com os valores padrão
+    private val _uiState = MutableStateFlow(WeatherUIState())
+
+    // StateFlow é a versão "só de leitura" do MutableStateFlow
+    // Exposta para a UI — a UI pode LER mas não pode ESCREVER
+    // Isto é uma boa prática: só o ViewModel controla o estado
+    val uiState: StateFlow<WeatherUIState> = _uiState
+
+    // Função chamada pela UI quando o utilizador muda a latitude
+    // Usamos .copy() para criar uma NOVA instância do estado
+    // com apenas a latitude alterada — os outros campos ficam iguais
+    // Em Kotlin, data classes são imutáveis, por isso criamos sempre
+    // uma cópia em vez de modificar diretamente
+    fun updateLatitude(lat: Float) {
+        _uiState.value = _uiState.value.copy(latitude = lat)
+    }
+
+    // Mesmo conceito para a longitude
+    fun updateLongitude(lon: Float) {
+        _uiState.value = _uiState.value.copy(longitude = lon)
+    }
+
+    // Função chamada quando o utilizador carrega no botão "Update Weather"
+    fun fetchWeather() {
+
+        // viewModelScope.launch cria uma coroutine — um bloco de código
+        // que corre de forma assíncrona sem bloquear a UI
+        // Quando a app fechar, o viewModelScope cancela a coroutine automaticamente
+        viewModelScope.launch {
+
+            // Ativamos o loading ANTES de chamar a API
+            // Assim a UI mostra imediatamente o indicador de carregamento
+            // sem esperar pela resposta da API
+            _uiState.value = _uiState.value.copy(isLoading = true)
+
+            // Chamamos a API com as coordenadas atuais do estado
+            // Esta chamada é "suspend" — pausa aqui até ter resposta,
+            // mas sem bloquear a thread principal (UI continua responsiva)
+            val data = WeatherApiClient.getWeather(
+                _uiState.value.latitude,
+                _uiState.value.longitude
+            )
+
+            // "data?.let { }" só executa o bloco se "data" não for null
+            // É a forma segura de trabalhar com valores que podem ser null em Kotlin
+            // O "it" dentro do bloco refere-se ao objeto "data"
+            data?.let {
+
+                // Atualizamos o estado com os novos dados da API
+                // Usamos .copy() novamente para manter os campos que não mudaram
+                // (latitude e longitude ficam iguais, só os dados meteo mudam)
+                _uiState.value = _uiState.value.copy(
+                    temperature = it.currentWeather.temperature,
+                    windspeed = it.currentWeather.windspeed,
+                    winddirection = it.currentWeather.winddirection,
+                    weathercode = it.currentWeather.weathercode,
+                    time = it.currentWeather.time,
+
+                    // firstOrNull() devolve o primeiro elemento da lista,
+                    // ou null se a lista estiver vazia
+                    // ?: é o "Elvis operator" — se for null usa 0f
+                    seaLevelPressure = it.hourly.pressureMsl.firstOrNull() ?: 0f,
+
+                    // isDay == 1 é uma comparação que devolve true se for dia
+                    // e false se for noite (quando isDay == 0)
+                    isDay = it.currentWeather.isDay == 1,
+
+                    // Desativamos o loading depois de receber os dados com sucesso
+                    isLoading = false
+                )
+            }
+
+            // Se data for null significa que houve um erro (sem internet, API em baixo, etc.)
+            // Mesmo assim desativamos o loading para a UI não ficar presa a carregar
+            if (data == null) {
+                _uiState.value = _uiState.value.copy(isLoading = false)
+            }
+        }
+    }
+}
