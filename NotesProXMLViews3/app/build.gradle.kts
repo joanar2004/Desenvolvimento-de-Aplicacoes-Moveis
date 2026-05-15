@@ -37,15 +37,12 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.auth)
-    implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.firestore)
     implementation("com.firebaseui:firebase-ui-firestore:9.0.0")
     testImplementation(libs.junit)
